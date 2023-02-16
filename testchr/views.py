@@ -2,6 +2,11 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from .models import Station
 import requests
+from django.core.paginator import (
+    Paginator,
+    EmptyPage,
+    PageNotAnInteger,
+)
 
 # Create your views here.
 
@@ -22,6 +27,17 @@ def save_stations_data(request):
 
 def display_stations_data(request):
     template_name = 'stations_data.html'
-    stations = Station.objects.all()[:10]
+    default_page = 1
+    page = request.GET.get('page', default_page)
+    items_per_page = 10
+    query = Station.objects.all()
+    paginator = Paginator(query, items_per_page)
+    try:
+        stations = paginator.page(page)
+    except PageNotAnInteger:
+        stations = paginator.page(default_page)
+    except EmptyPage:
+        stations = paginator.page(paginator.num_pages)
+
     args = {'stations':stations}
     return render(request, template_name, args)
