@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Item 1{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container mt-2">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id de la estación</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Espacios disponibles</th>
+            <th scope="col">Bicicletas disponibles</th>
+            <th scope="col">Latitud</th>
+            <th scope="col">Longitud</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for station in stations %}
+                <tr class="table-dark">
+                  <th scope="row">{{station.station_id}}</th>
+                  <td>{{station.name}}</td>
+                  <td>{{station.empty_slots}}</td>
+                  <td>{{station.free_bikes}}</td>
+                  <td>{{station.latitude}}</td>
+                  <td>{{station.longitude}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</div>
+</body>
+</html>
