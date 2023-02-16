@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: testchr
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: password
+
+  web:
+    build: .
+    image: testchr
+    command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      NAME: testchr  #Nombre base de datos
+      USER: test #Usuario Base de dato
+      PASSWORD: password #Contraseña Base de datos
+      HOST: db #Contenedor base de datos
