@@ -32,7 +32,7 @@ Para ejecutar el proyecto se deben seguir los siguientes pasos:
 4. Abrir la terminal en la ruta donde se extrajo la carpeta
 5. Ejecutar el comando ``` docker-compose run web python manage.py makemigrations```
 6. Ejecutar el comando ``` docker-compose up --build```
- 6.1 Encontré un pequeño bug y no pude solucionarlo 😅 La consola entregará un error al ejecutar ```docker-compose up --build``` por primera vez, simplemente ejecuta el comando de nuevo y el proyecto se ejecutará.
+6.1 Encontré un pequeño bug y no pude solucionarlo 😅 La consola entregará un error al ejecutar ```docker-compose up --build``` por primera vez, simplemente ejecuta el comando de nuevo y el proyecto se ejecutará.
 7. Crear un usuario para el admin, ejecutar el comando ``` docker-compose run web python manage.py createsuperuser```
 8. Ingresar a la ruta http://localhost:8000/testchr/ (En este momento se obtienen los datos de la Api de la tarea 1 y se insertan en la base de datos)
 9. Para ver los datos insertados, ingresar a la ruta: http://localhost:8000/testchr/stations o en su defecto revisar los datos en el admin: http://localhost:8000/admin/testchr/station/
