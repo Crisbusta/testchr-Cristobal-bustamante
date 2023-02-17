@@ -4,13 +4,13 @@ El repositorio es un proyecto desarrollado en Django 4 + PostgreSQL + Docker. El
 
 El proyecto tiene una sola aplicación llamada testchr, la cual se encarga completamente de la tarea 1 y parcialmente de la tarea 2.
 
-##### Comentarios tarea 1:
+#### Comentarios tarea 1:
 En esta tarea me surgieron dudas principalmente sobre cuáles datos manejar del json, finalmente decidí trabajar solo con los datos en 'stations' omitiendo el array 'extras'. 
 La función 'save_stations_data' se encarga de obtener los datos de la Api e insertarlos en la base de datos.
 
 Además, realicé los dos items opcionales de la tarea. Creé una vista en el administrador y una vista personalizada que posee una tabla mostrando los datos con paginación incluída, la función 'display_stations_data' se encarga de esto.
 
-##### Comentarios tarea 2:
+#### Comentarios tarea 2:
 Esta tarea fue considerablemente más desafiante que la tarea 1. En primer lugar se desarrolla el script 'scraping-proyectos.py' que se encarga de obtener la información de la tabla en la url entregada. 
 Todo bien hasta aquí, el problema comienza cuando veo que son 2844 paginaciones y obtener toda la información tardaría demasiado si lo hacía iterando. 
 Es por esto que decidí utilizar hilos (Threads) para agilizar la obtención de datos, aún así el script de obtención de datos tarda +10min en obtener toda la información y guardarla en un archivo json.
