@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from .models import Station
+from .models import Station, Project
 import requests
 from django.core.paginator import (
     Paginator,
@@ -41,3 +41,21 @@ def display_stations_data(request):
 
     args = {'stations':stations}
     return render(request, template_name, args)
+
+def display_projects_data(request):
+    template_name = 'projects_data.html'
+    default_page = 1
+    page = request.GET.get('page', default_page)
+    items_per_page = 10
+    query = Project.objects.all().order_by('no').values()
+    paginator = Paginator(query, items_per_page)
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        projects = paginator.page(default_page)
+    except EmptyPage:
+        projects = paginator.page(paginator.num_pages)
+
+    args = {'projects':projects}
+    return render(request, template_name, args)
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Item 2{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+  <div class="container mt-2" style="margin-right:10rem;">
+    {% if projects %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Número</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Link</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Región</th>
+          <th scope="col">Tipología</th>
+          <th scope="col">Titular</th>
+          <th scope="col">Inversión</th>
+          <th scope="col">Fecha presentación</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Ubicación</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for item in projects %}
+          <tr class="table-dark">
+            <td>{{item.no}}</td>
+            <td>{{item.nombre}}</td>
+            <td><a href="{{item.enlace}}">Link</a></td>
+            <td>{{item.tipo}}</td>
+            <td>{{item.region}}</td>
+            <td>{{item.tipologia}}</td>
+            <td>{{item.titular}}</td>
+            <td>{{item.inversion}}</td>
+            <td>{{item.fechaPresentacionFecha_de_Ingreso}}</td>
+            <td>{{item.estado}}</td>
+            <td><a href="{{item.mapa}}">Link</a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  {% if projects.has_other_pages %}
+  <div class="btn-group mb-2" role="group" aria-label="Item pagination">
+    {% if projects.has_previous %}
+      <a href="?page={{ projects.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+    {% endif %}
+    {% for i in projects.paginator.page_range %}
+      {% if i == 1 %}
+        {% if projects.number == i %}
+          <a class="page-link active" href="">{{ i }}</a>
+        {% else %}
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+      {% endif %}
+    {% if i != 1 and i != projects.paginator.page_range|last %}
+      {% if projects.number == i %}
+        <a class="page-link active" href="">{{ i }}</a> 
+      {% else %}
+        {% if projects.number|add:-4 == i %}
+          <a class="page-link" href="">...</a>
+        {% endif %}
+        {% if projects.number|add:3 >= i and projects.number|add:-3 <= i %}
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+        {% if projects.number|add:4 == i %}
+          <a class="page-link" href="">...</a>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    {% if i == projects.paginator.page_range|last %}
+      {% if projects.number == i %}
+        <a class="page-link active" href="">{{ projects.paginator.page_range|last }}</a>
+      {% else %}
+        <a class="page-link" href="?page={{ projects.paginator.page_range|last }}">{{ projects.paginator.page_range|last }}</a>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% else %}
+    <p>No items found.</p>
+  {% endif %}
+</div>
+</body>
+</html>

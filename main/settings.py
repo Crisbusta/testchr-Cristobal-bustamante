@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'testchr.apps.TestchrConfig',
-    'bootstrap5'
+    'bootstrap5',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -104,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 30000
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
